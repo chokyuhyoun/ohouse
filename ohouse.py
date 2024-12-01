@@ -67,15 +67,15 @@ def after_moving(tile_array, direction='up'):
     return templet
 
 def evaluation(after_tile_array):
-    # table0 = np.arange(4*4)[::-1].reshape(4, 4)
     table0 = np.array([[1, 2, 3, 4], 
-                       [3, 4, 5, 6], 
-                       [5, 6, 7, 8], 
-                       [7, 8, 9, 10]])
+                       [4, 5, 6, 7], 
+                       [7, 8, 9, 10], 
+                       [10, 11, 12, 13]])
+    # table0 = np.arange(4*4)[::-1].reshape(4, 4)    
     table = 2**(table0)
-    # table = table0**2
     # table[1] = table[1][::-1]
     # table[3] = table[3][::-1]
+
     # table[0, 0] *= 10
     # dum = after_tile_array
     dum = np.where(after_tile_array==0, 2, after_tile_array)
