@@ -68,9 +68,11 @@ def after_moving(tile_array, direction='up'):
 
 def evaluation(after_tile_array):
     table0 = np.array([[1, 2, 3, 4], 
-                       [4, 5, 6, 7], 
-                       [7, 8, 9, 10], 
-                       [10, 11, 12, 13]])
+                       [8, 7, 6, 5], 
+                       [9, 10, 11, 12], 
+                       [12, 13, 14, 15]])
+    if np.max(after_tile_array) >= 10:
+        table0[3] += 1
     # table0 = np.arange(4*4)[::-1].reshape(4, 4)    
     table = 2**(table0)
     # table[1] = table[1][::-1]
@@ -82,10 +84,10 @@ def evaluation(after_tile_array):
     return np.sum(table*(2**dum))
 
 def find_direct(tile_array, depth=3):
-    import numpy as np
     if np.sum(tile_array >= 9) > 3: return 'up', -1
     if (depth % 2) == 1:
-        dir_order = ['left', 'up', 'right', 'down']
+        # dir_order = ['left', 'up', 'right', 'down']
+        dir_order = ['down', 'left', 'right', ]
         score = np.zeros(len(dir_order))
         for ii, try_dir in enumerate(dir_order):
             after = after_moving(tile_array, direction=try_dir)
