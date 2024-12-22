@@ -127,15 +127,17 @@ def find_direction(tile_array, depth=3):
 
 def find_direction2(tile_array, depth=3):
     dir_order = ['left', 'up', 'right', 'down']
-    pool = mp.Pool(processes=4)
-    results = []
-    after = []
-    for direct in dir_order:
-        after.append(after_moving(tile_array, direct))
-    
-    for ii in range(4):
-        results.append(pool.apply_async(find_direct, (after[ii], depth-1)))
-    results = [res.get() for res in results]
+    # pool = mp.Pool(processes=4)
+    # results = []
+    # after = []
+    # for direct in dir_order:
+    #     after.append(after_moving(tile_array, direct))
+    # for ii in range(4):
+    #     results.append(pool.apply_async(find_direct, (after[ii], depth-1)))
+    # results = [res.get() for res in results]
+    with Pool(processes=4) as pool:  # Adjust the number of processes based on your CPU
+        results = pool.map(lambda move: find_direct(tile_array, depth-1), dir_order)
+
     return results
 
 
